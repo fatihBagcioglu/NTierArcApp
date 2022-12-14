@@ -12,13 +12,13 @@ namespace NLayer.Web.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductService _services;
-        private readonly ICategoryService _categoryservice;
+        private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
         public ProductsController(IProductService services, ICategoryService categoryService, IMapper mapper)
         {
             _services = services;
-            _categoryservice = categoryService;
+            _categoryService = categoryService;
             _mapper = mapper;
         }
 
@@ -30,7 +30,7 @@ namespace NLayer.Web.Controllers
 
         public async Task<IActionResult> Save()
         {
-            var categories = await _categoryservice.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync();
 
             var categoriesDto = _mapper.Map<List<CategoryDto>>(categories.ToList());
 
@@ -51,7 +51,7 @@ namespace NLayer.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var categories = await _categoryservice.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync();
 
             var categoriesDto = _mapper.Map<List<CategoryDto>>(categories.ToList());
 
